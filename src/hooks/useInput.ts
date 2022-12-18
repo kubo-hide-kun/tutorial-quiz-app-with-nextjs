@@ -10,10 +10,9 @@ export const useInput = () => {
     [setValue]
   );
 
-  return [
-    value,
-    {
-      onChange,
-    },
-  ] as const;
+  const reset = useCallback(() => {
+    setValue(null);
+  }, [setValue]);
+
+  return { value, reset, onChange } as const;
 };

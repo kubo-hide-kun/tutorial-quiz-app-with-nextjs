@@ -19,3 +19,26 @@ export const OmitCorrectQuestion = (
     }),
   };
 };
+
+export const extractCorrectAnswer = (questions: Question[]): string[][] => {
+  return questions.map((question) => {
+    if (question.type === "text") {
+      return [question.correctAnswer];
+    }
+    return question.answers
+      .filter((answer) => answer.correct)
+      .map((answer) => answer.id);
+  });
+};
+
+export const isCorrectAnswer = (
+  questions: Question[],
+  answer: string[][]
+): boolean => {
+  const correctAnswers = extractCorrectAnswer(questions);
+  return correctAnswers.every((correctAnswer, index) => {
+    return correctAnswer.every((answerId) => {
+      return answer[index].includes(answerId);
+    });
+  });
+};

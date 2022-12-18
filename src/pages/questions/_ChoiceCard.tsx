@@ -1,4 +1,7 @@
-import { ChoiceQuestionOmitCorrect } from "../../domains/question";
+import {
+  ChoiceQuestionOmitCorrect,
+  QuestionType,
+} from "../../domains/question";
 import { useInput } from "../../hooks/useInput";
 import { useCheckBox } from "../../hooks/useCheckBox";
 import classNames from "classnames";
@@ -25,20 +28,22 @@ const ChoiceCardPresenter = ({
   return (
     <CardForm onSubmit={onSubmit}>
       <div className="mb-16">{question.statement}</div>
-      <div className="flex flex-col gap-8">
+      <div id={question.id} className="flex flex-col gap-8">
         {question.answers.map((answer) => (
           <div
-            key={answer.id}
+            key={`${question.id}/${type}/${answer.id}`}
             className="flex items-center gap-4 p-4 rounded-lg hover:bg-white-cream"
           >
             <input
-              id={answer.id}
+              id={`${question.id}/${type}/${answer.id}`}
               type={type}
               name="answer"
               value={answer.id}
               onChange={onChange}
             />
-            <label htmlFor={answer.id}>{answer.text}</label>
+            <label htmlFor={`${question.id}/${type}/${answer.id}`}>
+              {answer.text}
+            </label>
           </div>
         ))}
       </div>
@@ -60,54 +65,62 @@ const ChoiceCardPresenter = ({
   );
 };
 
-export const RadioCard = ({
-  final,
-  question,
-}: Pick<Props, "final" | "question">) => {
-  const [value, bind] = useInput();
+export type RadioCardProps = Pick<Props, "final" | "question"> & {
+  onAnswered: (answers: string[]) => void;
+};
+
+export const RadioCard = ({ final, question, onAnswered }: RadioCardProps) => {
+  const { value: answer, onChange, reset } = useInput();
 
   const onSubmit = useCallback<React.FormEventHandler<HTMLFormElement>>(
     (e) => {
       e.preventDefault();
-      console.log(value);
+      onAnswered([answer]);
+      reset();
     },
-    [value]
+    [answer]
   );
 
   return (
     <ChoiceCardPresenter
       question={question}
       type="radio"
-      disabled={!value}
+      disabled={!answer}
       final={final}
+      onChange={onChange}
       onSubmit={onSubmit}
-      {...bind}
     />
   );
+};
+
+export type CheckboxCardProps = Pick<Props, "final" | "question"> & {
+  onAnswered: (answers: string[]) => void;
 };
 
 export const CheckboxCard = ({
   final,
   question,
-}: Pick<Props, "final" | "question">) => {
-  const [values, bind] = useCheckBox();
+  onAnswered,
+}: CheckboxCardProps) => {
+  const { values: answers, onChange, reset } = useCheckBox();
 
   const onSubmit = useCallback<React.FormEventHandler<HTMLFormElement>>(
     (e) => {
       e.preventDefault();
-      console.log(values);
+      onAnswered(answers);
+      reset();
     },
-    [values]
+    [answers, onAnswered]
   );
 
   return (
     <ChoiceCardPresenter
       question={question}
       type="checkbox"
-      disabled={values.length === 0}
+      disabled={answers.length === 0}
       final={final}
+      onChange={onChange}
       onSubmit={onSubmit}
-      {...bind}
     />
   );
 };

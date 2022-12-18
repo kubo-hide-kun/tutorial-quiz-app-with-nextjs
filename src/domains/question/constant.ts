@@ -3,7 +3,7 @@ import { Question, QuestionType } from "./schema";
 export const SAMPLE_QUESTION: Question[] = [
   {
     id: "1",
-    type: "multiple-choice",
+    type: "choice",
     statement: "What is the capital of France?",
     answers: [
       {

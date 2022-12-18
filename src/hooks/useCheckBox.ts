@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export const useCheckBox = () => {
-  const [value, setValue] = useState<string[] | null>([]);
+  const [values, setValue] = useState<string[] | null>([]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = e.target;
@@ -12,10 +12,13 @@ export const useCheckBox = () => {
     }
   };
 
-  return [
-    value,
-    {
-      onChange,
-    },
-  ] as const;
+  const reset = useCallback(() => {
+    setValue([]);
+  }, [setValue]);
+
+  return {
+    values,
+    reset,
+    onChange,
+  } as const;
 };
