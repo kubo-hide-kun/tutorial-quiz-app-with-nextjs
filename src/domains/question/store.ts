@@ -1,6 +1,5 @@
 import { useCallback } from "react";
 import { atom, useRecoilState } from "recoil";
-import { QuestionType } from "./schema";
 
 const answerState = atom<string[][]>({
   key: "answerState",
