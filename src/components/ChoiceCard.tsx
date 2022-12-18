@@ -1,11 +1,8 @@
-import {
-  ChoiceQuestionOmitCorrect,
-  QuestionType,
-} from "../../domains/question";
-import { useInput } from "../../hooks/useInput";
-import { useCheckBox } from "../../hooks/useCheckBox";
+import { ChoiceQuestionOmitCorrect } from "../domains/question";
+import { useInput } from "../hooks/useInput";
+import { useCheckBox } from "../hooks/useCheckBox";
 import classNames from "classnames";
-import { CardForm } from "../../components/CardForm";
+import { CardForm } from "./CardForm";
 import { useCallback } from "react";
 
 type Props = {

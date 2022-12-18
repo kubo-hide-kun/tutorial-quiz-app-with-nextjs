@@ -1,7 +1,7 @@
-import { QuestionType, TextQuestionOmitCorrect } from "../../domains/question";
-import { useInput } from "../../hooks/useInput";
+import { TextQuestionOmitCorrect } from "../domains/question";
+import { useInput } from "../hooks/useInput";
 import classNames from "classnames";
-import { CardForm } from "../../components/CardForm";
+import { CardForm } from "./CardForm";
 import { useCallback } from "react";
 
 export type TextCardProps = {
@@ -11,11 +11,7 @@ export type TextCardProps = {
 };
 
 export const TextCard = ({ final, question, onAnswered }: TextCardProps) => {
-  const {
-    value: answer,
-    onChange,
-    reset,
-  } = useInput();
+  const { value: answer, onChange, reset } = useInput();
 
   const onSubmit = useCallback<React.FormEventHandler<HTMLFormElement>>(
     (e) => {

@@ -11,8 +11,8 @@ import {
 import { useAnswerState } from "../../domains/question/store";
 import { getBasicLayout } from "../../layouts/basic";
 import { NextPageWithLayout } from "../_app";
-import { CheckboxCard, RadioCard } from "./_ChoiceCard";
-import { TextCard } from "./_TextCard";
+import { CheckboxCard, RadioCard } from "../../components/ChoiceCard";
+import { TextCard } from "../../components/TextCard";
 
 type Props = {
   question: QuestionOmitCorrect;
