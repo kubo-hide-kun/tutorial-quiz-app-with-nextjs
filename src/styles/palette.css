@@ -1,9 +1,13 @@
 :root {
+  --brand-cyan-dark: #4fb5c5;
   --brand-cyan: #30c8d6;
   --brand-cyan-light: #55dddd;
+  --brand-cyan-bright: #47ecbd;
+  --black-default: #000000;
   --gray-dark: #444444;
   --gray-default: #7e7e7e;
-  --gray-light: #d3d3d3;
+  --gray-light: #aaaaaa;
+  --blue-deep: #252c4b;
   --blue-dark: #2b546a;
   --blue-default: #0099ff;
   --blue-light: #6fd0ee;
@@ -11,6 +15,12 @@
   --white-default: #ffffff;
   --white-cream: #fffae9;
   --white-smoke: #f5f5f5;
-  --expressive-orange: #f38702;
+  --white-salmon: #fde9ea;
+  --expressive-red: #e92e2f;
   --expressive-pink: #e0245e;
+  --expressive-orange: #f38702;
+}
+
+:root {
+  color: var(--blue-dark);
 }

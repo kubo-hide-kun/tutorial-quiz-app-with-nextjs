@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { ReactElement, ReactNode } from 'react'
+import type { NextPage } from 'next'
 import { AppProps } from 'next/app'
 
 import '../styles/index.css'
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+// ページ間で共通のレイアウトを適用するための実装
+// @see https://nextjs.org/docs/basic-features/layouts#with-typescript
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode
+}
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout || ((page) => page)
+  return getLayout(<Component {...pageProps} />)
 }
 
 export default MyApp;

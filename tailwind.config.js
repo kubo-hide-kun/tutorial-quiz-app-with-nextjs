@@ -15,7 +15,7 @@ module.exports = {
     },
     spacing: {
       px: '1px',
-      ...range(1, 640).reduce((acc, i) => {
+      ...range(1, 800).reduce((acc, i) => {
         acc[i] = `${i}px`;
         return acc;
       }, {}),
@@ -43,25 +43,33 @@ module.exports = {
       transparent: "transparent",
       /* ブランドカラー */
       brand: {
-        cyan: "var(--brand-cyan)",
-        "cyan-light": "var(--brand-cyan-light)",
+        cyan: {
+          DEFAULT: "var(--brand-cyan)",
+          light: "var(--brand-cyan-light)",
+          bright: "var(--brand-cyan-bright)",
+        }
+      },
+      /* ベースカラー: ブラック */
+      black: {
+        DEFAULT: "var(--black-default)",
       },
       /* ベースカラー: グレー */
       gray: {
         dark: "var(--gray-dark)",
-        default: "var(--gray-default)",
+        DEFAULT: "var(--gray-default)",
         light: "var(--gray-light)",
       },
       /* ベースカラー: ブルー */
       blue: {
+        deep: "var(--blue-deep)",
         dark: "var(--blue-dark)",
-        default: "var(--blue-default)",
+        DEFAULT: "var(--blue-default)",
         light: "var(--blue-light)",
         sky: "var(--blue-sky)",
       },
       /* ベースカラー: ホワイト */
       white: {
-        default: "var(--white-default)",
+        DEFAULT: "var(--white-default)",
         cream: "var(--white-cream)",
         smoke: "var(--white-smoke)",
       },
@@ -71,6 +79,11 @@ module.exports = {
         pink: "var(--expressive-pink)",
       },
     },
+    extend: {
+      backgroundImage: {
+        'brand-gradient-cyan': 'linear-gradient(270deg, var(--brand-cyan-bright) 0%, var(--brand-cyan-dark) 100%)',
+      }
+    }
   },
   plugins: ["tailwindcss", "postcss-preset-env"],
 };
