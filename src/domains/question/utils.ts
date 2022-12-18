@@ -31,14 +31,17 @@ export const extractCorrectAnswer = (questions: Question[]): string[][] => {
   });
 };
 
-export const isCorrectAnswer = (
+export const getResults = (
   questions: Question[],
   answer: string[][]
-): boolean => {
+): boolean[] => {
   const correctAnswers = extractCorrectAnswer(questions);
-  return correctAnswers.every((correctAnswer, index) => {
-    return correctAnswer.every((answerId) => {
-      return answer[index].includes(answerId);
-    });
+  return correctAnswers.map((correctAnswer, index) => {
+    return (
+      correctAnswer.length === answer[index]?.length &&
+      correctAnswer.every((answerId) => {
+        return answer[index] && answer[index].includes(answerId);
+      })
+    );
   });
 };

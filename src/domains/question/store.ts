@@ -16,6 +16,7 @@ export const useAnswerState = () => {
       if (value.length + 1 === idx) {
         setValue((prev) => [...prev, answers]);
       } else {
+        setValue([]);
         throw new Error("Invalid index");
       }
     },
@@ -27,9 +28,14 @@ export const useAnswerState = () => {
     setValue((prev) => prev.slice(0, -1));
   }, [setValue]);
 
+  const reset = useCallback(() => {
+    setValue([]);
+  }, [setValue]);
+
   return {
     value,
     push,
     pop,
+    reset,
   };
 };

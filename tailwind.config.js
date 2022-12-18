@@ -72,11 +72,15 @@ module.exports = {
         DEFAULT: "var(--white-default)",
         cream: "var(--white-cream)",
         smoke: "var(--white-smoke)",
+        reef: "var(--white-reef)",
       },
       /* 表現色 */
       expressive: {
+        red: "var(--expressive-red)",
         orange: "var(--expressive-orange)",
         pink: "var(--expressive-pink)",
+        green: "var(--expressive-green)",
+        
       },
     },
     extend: {

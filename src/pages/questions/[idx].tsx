@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
+import { toast } from "react-hot-toast";
 import {
   OmitCorrectQuestion,
   QuestionOmitCorrect,
@@ -10,13 +11,8 @@ import {
 import { useAnswerState } from "../../domains/question/store";
 import { getBasicLayout } from "../../layouts/basic";
 import { NextPageWithLayout } from "../_app";
-import {
-  CheckboxCard,
-  CheckboxCardProps,
-  RadioCard,
-  RadioCardProps,
-} from "./_ChoiceCard";
-import { TextCard, TextCardProps } from "./_TextCard";
+import { CheckboxCard, RadioCard } from "./_ChoiceCard";
+import { TextCard } from "./_TextCard";
 
 type Props = {
   question: QuestionOmitCorrect;
@@ -64,9 +60,14 @@ const QuestionPage: NextPageWithLayout<Props> = ({ question, maxSize }) => {
           idx,
           answers,
         });
+        if (idx === maxSize) {
+          router.push("/result");
+          return;
+        }
         router.push(`/questions/${idx + 1}`);
       } catch (e) {
-        console.error(e);
+        toast.error("不正なページの遷移を検知したので、トップページに戻ります。");
+        router.push("/");
       }
     },
     [idx, push]

@@ -2,6 +2,7 @@ import React, { ReactElement, ReactNode } from "react";
 import { RecoilRoot } from "recoil";
 import type { NextPage } from "next";
 import { AppProps } from "next/app";
+import { Toaster } from "react-hot-toast";
 
 import "../styles/index.css";
 
@@ -20,6 +21,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return getLayout(
     <RecoilRoot>
       <Component {...pageProps} />
+      <Toaster position="bottom-center" />
     </RecoilRoot>
   );
 }
